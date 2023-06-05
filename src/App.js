@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState } from "react"
 import './App.css';
 import Header from './componente/Header/header.js';
 import Formulario from './componente/Formulario/Formulario.js';
@@ -15,9 +15,7 @@ function App() {
     <div >      
       <Header />
 
-      { mostrarFormulario === true ? <Formulario /> : <div></div> }
-
-
+      { mostrarFormulario === true ? <Formulario /> : <div> </div> }
       
       <MiOrg />
 
