@@ -19,6 +19,46 @@ function App() {
       actualizarMostrar(!mostrarFormulario)
   }
 
+  //Lista de Equipos
+
+  const equipos = [
+    {
+      titulo: "Programación",
+      colorPrimario: "#57c278",
+      colorSecundario: "#d9f7e9"
+    },
+    {
+      titulo: "Front End",
+      colorPrimario: "#82cffa",
+      colorSecundario: "#e8f8ff"
+    },
+    {
+      titulo: "Data Science",
+      colorPrimario: "#a6d157",
+      colorSecundario: "#f0f8e2"
+    },
+    {
+      titulo: "Dev Ops",
+      colorPrimario: "#e06b69",
+      colorSecundario: "#fde7e8"
+    },
+    {
+      titulo: "UX y Diseño",
+      colorPrimario: "#db6ebf",
+      colorSecundario: "#fae9f5"
+    },
+    {
+      titulo: "Móvil",
+      colorPrimario: "#ffba05",
+      colorSecundario: "#fff5d9"
+    },
+    {
+      titulo: "Innovación y Gestión",
+      colorPrimario: "#dd8a29",
+      colorSecundario: "#ffeedf"
+    },
+  ];
+
   return (    
     <div >      
 
@@ -28,13 +68,16 @@ function App() {
       { /*mostrarFormulario && <Formulario />*/ }
        
       <MiOrg cambiarMostrar = {cambiarMostrar}  />
-      <Equipo equipo="Programación" />
-      <Equipo equipo="Front End" />
-      <Equipo equipo="Data Science" />
-      <Equipo equipo="Dev Ops" />
-      <Equipo equipo="UX y Diseño" />
-      <Equipo equipo="Móvil" />
-      <Equipo equipo="Innovación y Gestión" />
+      
+      {
+        equipos.map( (equipo) => <Equipo datos={equipo} key={equipo.titulo} /> )
+
+        /*
+          () => { return (argumento)} es una forma comun de usar arrow funtions, pero si uno sabe lo que 
+          devolvera el argumento, se pueden omitir tanto las {} como el return dentro de ellas, 
+          quedando asi  () => argumento  de esta forma el codigo es mas limpio.    
+        */
+      }   
       
     </div>
   );
