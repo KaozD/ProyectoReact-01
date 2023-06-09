@@ -11,6 +11,8 @@ const Formulario = (props) => {
     const [foto, actualizarFoto] = useState("");
     const [equipo, actualizarEquipo] = useState("");
 
+    const { registrarColab } = props
+
     function manejarEnvio(e) {
         e.preventDefault();
         console.log("manejar el envio");
@@ -20,8 +22,7 @@ const Formulario = (props) => {
             foto,
             equipo
         };
-        console.log(datosAEnviar);
-
+        registrarColab(datosAEnviar);
     }
 
     return <section className="formulario">

@@ -9,14 +9,28 @@ import Equipo from './componente/Equipo';
 
 function App() {
 
-  const [mostrarFormulario, actualizarMostrar] = useState(false)
+  const [mostrarFormulario, actualizarMostrar] = useState(false);
+  const [colaboradores, actualizarColab] =  useState([]); 
 
   //Ternario --> condicion ? seMuestra : noSeMuestra
   //condicion && seMuestra
 
-
   const cambiarMostrar = () => {
       actualizarMostrar(!mostrarFormulario)
+  }
+
+  //Registrar Colaborador
+
+  const registarColab = (colaborador) =>{
+    console.log("Nuevo colaborador", colaborador);
+    /*
+    Spread operator
+      Es usado para poder copiar infomacion ya existente, 
+      se puede identificar por estar precedida la variable por puntos suspencivos
+      de la siguiente forma  ...Var  y seguido de otra variable que sera la que se agregue
+      quedando asi  ...Var, AddVar todo dentro de un arreglo ya existente
+    */
+    actualizarColab([...colaboradores, colaborador])
   }
 
   //Lista de Equipos
@@ -64,8 +78,11 @@ function App() {
 
       <Header />
 
-      { mostrarFormulario ? <Formulario equipos={equipos.map((equipo) => equipo.titulo)} /> : <> </> }
-      { /*mostrarFormulario && <Formulario />*/ }
+      { mostrarFormulario ? <Formulario 
+          equipos={equipos.map((equipo) => equipo.titulo)} 
+          registrarColab={registarColab} /> : <> </>
+      }
+      
        
       <MiOrg cambiarMostrar = {cambiarMostrar}  />
       
@@ -77,10 +94,15 @@ function App() {
   );
 }
 
+export default App;
+
+/* 
+Otra forma de codificar la terna
+  mostrarFormulario && <Formulario />  
+*/ 
+
 /*
   () => { return (argumento)} es una forma comun de usar arrow funtions, pero si uno sabe lo que 
   devolvera el argumento, se pueden omitir tanto las {} como el return dentro de ellas, 
   quedando asi  () => argumento  de esta forma el codigo es mas limpio.    
 */
-
-export default App;
