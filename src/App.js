@@ -64,23 +64,23 @@ function App() {
 
       <Header />
 
-      { mostrarFormulario === true ? <Formulario /> : <> </> }
+      { mostrarFormulario ? <Formulario equipos={equipos.map((equipo) => equipo.titulo)} /> : <> </> }
       { /*mostrarFormulario && <Formulario />*/ }
        
       <MiOrg cambiarMostrar = {cambiarMostrar}  />
       
       {
-        equipos.map( (equipo) => <Equipo datos={equipo} key={equipo.titulo} /> )
-
-        /*
-          () => { return (argumento)} es una forma comun de usar arrow funtions, pero si uno sabe lo que 
-          devolvera el argumento, se pueden omitir tanto las {} como el return dentro de ellas, 
-          quedando asi  () => argumento  de esta forma el codigo es mas limpio.    
-        */
+        equipos.map( (equipo) => <Equipo datos={equipo} key={equipo.titulo} /> )        
       }   
       
     </div>
   );
 }
+
+/*
+  () => { return (argumento)} es una forma comun de usar arrow funtions, pero si uno sabe lo que 
+  devolvera el argumento, se pueden omitir tanto las {} como el return dentro de ellas, 
+  quedando asi  () => argumento  de esta forma el codigo es mas limpio.    
+*/
 
 export default App;
