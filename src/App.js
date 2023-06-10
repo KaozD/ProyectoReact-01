@@ -5,12 +5,44 @@ import Header from './componente/Header/header.js';
 import Formulario from './componente/Formulario/Formulario.js';
 import MiOrg from './componente/MiOrg';
 import Equipo from './componente/Equipo';
+import Footer from './componente/Footer';
 
 
 function App() {
 
   const [mostrarFormulario, actualizarMostrar] = useState(false);
-  const [colaboradores, actualizarColab] =  useState([]); 
+  const [colaboradores, actualizarColab] =  useState([
+    {
+      equipo: "Front End",
+      foto: "https://github.com/KaozD.png",
+      nombre: "Laura Prados",
+      puesto: "Isntructora"
+    },
+    {
+      equipo: "Programación",
+      foto: "https://github.com/KaozD.png",
+      nombre: "Carlos Aguilar",
+      puesto: "Programador"
+    },
+    {
+      equipo: "UX y Diseño",
+      foto: "https://github.com/KaozD.png",
+      nombre: "Raul Mendoza",
+      puesto: "Instrucor en One"
+    },
+    {
+      equipo: "Programación",
+      foto: "https://github.com/KaozD.png",
+      nombre: "Yareli Fonseca",
+      puesto: "Head de One"
+    },
+    {
+      equipo: "Innovación y Gestión",
+      foto: "https://github.com/KaozD.png",
+      nombre: "Jose Romero",
+      puesto: "Dev Fullstack"
+    }
+  ]); 
 
   //Ternario --> condicion ? seMuestra : noSeMuestra
   //condicion && seMuestra
@@ -23,14 +55,13 @@ function App() {
 
   const registarColab = (colaborador) =>{
     console.log("Nuevo colaborador", colaborador);
-    /*
-    Spread operator
-      Es usado para poder copiar infomacion ya existente, 
-      se puede identificar por estar precedida la variable por puntos suspencivos
-      de la siguiente forma  ...Var  y seguido de otra variable que sera la que se agregue
-      quedando asi  ...Var, AddVar todo dentro de un arreglo ya existente
-    */
+    
     actualizarColab([...colaboradores, colaborador])
+  }
+
+  //Eliminar Registro
+  const eliminarColab = () => {
+    console.log("Eliminar Colaborador");
   }
 
   //Lista de Equipos
@@ -82,13 +113,19 @@ function App() {
           equipos={equipos.map((equipo) => equipo.titulo)} 
           registrarColab={registarColab} /> : <> </>
       }
-      
-       
+             
       <MiOrg cambiarMostrar = {cambiarMostrar}  />
       
       {
-        equipos.map( (equipo) => <Equipo datos={equipo} key={equipo.titulo} /> )        
-      }   
+        equipos.map( (equipo) => <Equipo 
+          datos={equipo} 
+          key={equipo.titulo}
+          colaboradores={colaboradores.filter(colaborador => colaborador.equipo === equipo.titulo)}
+          eliminarColab={eliminarColab}
+          /> )        
+      }
+
+      <Footer />   
       
     </div>
   );
@@ -105,4 +142,12 @@ Otra forma de codificar la terna
   () => { return (argumento)} es una forma comun de usar arrow funtions, pero si uno sabe lo que 
   devolvera el argumento, se pueden omitir tanto las {} como el return dentro de ellas, 
   quedando asi  () => argumento  de esta forma el codigo es mas limpio.    
+*/
+
+/*
+Spread operator
+  Es usado para poder copiar infomacion ya existente, 
+  se puede identificar por estar precedida la variable por puntos suspencivos
+  de la siguiente forma  ...Var  y seguido de otra variable que sera la que se agregue
+  quedando asi  ...Var, AddVar todo dentro de un arreglo ya existente
 */
