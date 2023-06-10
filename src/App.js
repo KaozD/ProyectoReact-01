@@ -10,8 +10,9 @@ import Footer from './componente/Footer';
 
 function App() {
 
-  const [mostrarFormulario, actualizarMostrar] = useState(false);
-  const [colaboradores, actualizarColab] =  useState([
+  const [ mostrarFormulario, actualizarMostrar ] = useState(false);
+
+  const [ colaboradores, actualizarColab ] =  useState([
     {
       equipo: "Front End",
       foto: "https://github.com/KaozD.png",
@@ -44,29 +45,7 @@ function App() {
     }
   ]); 
 
-  //Ternario --> condicion ? seMuestra : noSeMuestra
-  //condicion && seMuestra
-
-  const cambiarMostrar = () => {
-      actualizarMostrar(!mostrarFormulario)
-  }
-
-  //Registrar Colaborador
-
-  const registarColab = (colaborador) =>{
-    console.log("Nuevo colaborador", colaborador);
-    
-    actualizarColab([...colaboradores, colaborador])
-  }
-
-  //Eliminar Registro
-  const eliminarColab = () => {
-    console.log("Eliminar Colaborador");
-  }
-
-  //Lista de Equipos
-
-  const equipos = [
+  const [ equipos, actualizarEquipos ]  = useState ([
     {
       titulo: "Programación",
       colorPrimario: "#57c278",
@@ -101,8 +80,40 @@ function App() {
       titulo: "Innovación y Gestión",
       colorPrimario: "#dd8a29",
       colorSecundario: "#ffeedf"
-    },
-  ];
+    }
+  ]);
+
+  //Ternario --> condicion ? seMuestra : noSeMuestra
+  //condicion && seMuestra
+
+  const cambiarMostrar = () => {
+      actualizarMostrar( !mostrarFormulario );
+  }
+
+  //Registrar Colaborador
+  const registarColab = ( colaborador ) =>{
+    console.log( "Nuevo colaborador", colaborador );    
+    actualizarColab( [ ...colaboradores, colaborador ] );
+  }
+
+  //Eliminar Registro
+  const eliminarColab = () => {
+    console.log( "Eliminar Colaborador" );
+  }
+
+  //Actualizar color de equipo
+  const actualizarColor = ( color, titulo ) => { 
+    console.log( "Actualizar : ", color, titulo )
+    const equiposActualizados = equipos.map( (equipo) => {
+      if(equipo.titulo === titulo){
+        equipo.colorPrimario = color;
+      }
+
+      return equipo;
+    })
+
+    actualizarEquipos(equiposActualizados);
+  }
 
   return (    
     <div >      
@@ -110,18 +121,19 @@ function App() {
       <Header />
 
       { mostrarFormulario ? <Formulario 
-          equipos={equipos.map((equipo) => equipo.titulo)} 
-          registrarColab={registarColab} /> : <> </>
+          equipos={equipos.map( ( equipo ) => equipo.titulo )} 
+          registrarColab={ registarColab } /> : <> </>
       }
              
-      <MiOrg cambiarMostrar = {cambiarMostrar}  />
+      <MiOrg cambiarMostrar = { cambiarMostrar }  />
       
       {
-        equipos.map( (equipo) => <Equipo 
-          datos={equipo} 
-          key={equipo.titulo}
-          colaboradores={colaboradores.filter(colaborador => colaborador.equipo === equipo.titulo)}
-          eliminarColab={eliminarColab}
+        equipos.map( ( equipo ) => <Equipo 
+          datos={ equipo } 
+          key={ equipo.titulo }
+          colaboradores={ colaboradores.filter( colaborador => colaborador.equipo === equipo.titulo )}
+          eliminarColab={ eliminarColab }
+          actualizarColor={ actualizarColor }
           /> )        
       }
 
