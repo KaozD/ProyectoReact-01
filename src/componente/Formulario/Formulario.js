@@ -6,41 +6,51 @@ import Boton from "../Boton";
 
 const Formulario = (props) => {
 
-    const [nombre, actualizarNombre] = useState("");
-    const [puesto, actualizarPuesto] = useState("");
-    const [foto, actualizarFoto] = useState("");
-    const [equipo, actualizarEquipo] = useState("");
+    const [ nombre, actualizarNombre ] = useState("");
+    const [ puesto, actualizarPuesto ] = useState("");
+    const [ foto, actualizarFoto ] = useState("");
+    const [ equipo, actualizarEquipo ] = useState("");
 
-    const { registrarColab } = props
+    const [ titulo, actualizarTitulo ] = useState("");
+    const [ color, actualizarColor ] = useState("");
 
-    function manejarEnvio(e) {
-        e.preventDefault();
-        console.log("manejar el envio");
+    const { registrarColab, crearEquipo } = props
+
+    const manejarEnvio = ( e ) => {
+        e.preventDefault( );
+        console.log( "Manejar el envio" );
         let datosAEnviar = {
             nombre,
             puesto,
             foto,
             equipo
         };
-        registrarColab(datosAEnviar);
+        registrarColab( datosAEnviar );
     }
 
+    const manejarNuevoEquipo = ( e ) => {
+        e.preventDefault( );
+        crearEquipo( { titulo, colorPrimario: color } )
+    }
+
+
+
     return <section className="formulario">
-        <form onSubmit={manejarEnvio}>
+        <form onSubmit={ manejarEnvio }>
             <h2>Rellena el formulario para crear el colaborador</h2>
             <CampoTexto
                 titulo="Nombre"
                 placeholder = "Ingresar el nombre" 
                 required 
-                valor={nombre} 
-                actualizarValor={actualizarNombre}
+                valor={ nombre } 
+                actualizarValor={ actualizarNombre }
             />
             <CampoTexto 
                 titulo="Puesto" 
                 placeholder = "Ingresa el puesto" 
                 required 
-                valor={puesto} 
-                actualizarValor={actualizarPuesto}
+                valor={ puesto } 
+                actualizarValor={ actualizarPuesto }
                 
             />
             <CampoTexto 
@@ -59,6 +69,25 @@ const Formulario = (props) => {
             <Boton>
                 Crear
             </Boton>              
+        </form>
+        <form onSubmit={ manejarNuevoEquipo }>
+            <h2>Rellena el formulario para crear el equipo</h2>
+            <CampoTexto
+                titulo="Titulo"
+                placeholder = "Ingresar titulo" 
+                required 
+                valor={ titulo } 
+                actualizarValor={ actualizarTitulo }
+            />
+            <CampoTexto 
+                titulo="Color" 
+                placeholder = "Ingresa el color en Hex" 
+                required 
+                valor={ color } 
+                actualizarValor={ actualizarColor }                
+            />
+            <Boton> Registrar Equipo </Boton>
+
         </form>
     </section>
 }
