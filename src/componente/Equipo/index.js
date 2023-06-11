@@ -7,7 +7,7 @@ const Equipo = ( props ) => {
 
     //Destructuracion 
     const { titulo, colorPrimario, colorSecundario, id } = props.datos;
-    const { colaboradores, eliminarColab, actualizarColor } = props;
+    const { colaboradores, eliminarColab, actualizarColor, like } = props;
 
     const formato = { backgroundColor: hexToRgba( colorPrimario, 0.5 ) }    
     
@@ -19,7 +19,7 @@ const Equipo = ( props ) => {
                     <input 
                         type="color"
                         className="input-Color"
-                        value={ hexToRgba( colorPrimario, 0.6 ) }
+                        value={ colorPrimario }
                         onChange={ ( evento ) => { actualizarColor(evento.target.value, id) } }
                     />
                     <h3 style={estiloTitulo}> {titulo} </h3>
@@ -31,6 +31,7 @@ const Equipo = ( props ) => {
                                     key={ index }
                                     colorPrimario={ colorPrimario } 
                                     eliminarColab={ eliminarColab }
+                                    like={ like }
                                 /> )
                         }               
                     </div>

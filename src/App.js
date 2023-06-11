@@ -19,35 +19,40 @@ function App() {
       equipo: "Front End",
       foto: "https://github.com/KaozD.png",
       nombre: "Laura Prados",
-      puesto: "Isntructora"
+      puesto: "Isntructora",
+      fav: true
     },
     {
       id: uuid(),
       equipo: "Programación",
       foto: "https://github.com/KaozD.png",
       nombre: "Carlos Aguilar",
-      puesto: "Programador"
+      puesto: "Programador",
+      fav: true
     },
     {
       id: uuid(),
       equipo: "UX y Diseño",
       foto: "https://github.com/KaozD.png",
       nombre: "Raul Mendoza",
-      puesto: "Instrucor en One"
+      puesto: "Instrucor en One",
+      fav: true
     },
     {
       id: uuid(),
       equipo: "Programación",
       foto: "https://github.com/KaozD.png",
       nombre: "Yareli Fonseca",
-      puesto: "Head de One"
+      puesto: "Head de One",
+      fav: false
     },
     {
       id: uuid(),
       equipo: "Innovación y Gestión",
       foto: "https://github.com/KaozD.png",
       nombre: "Jose Romero",
-      puesto: "Dev Fullstack"
+      puesto: "Dev Fullstack",
+      fav: false
     }
   ]); 
 
@@ -119,21 +124,32 @@ function App() {
   //Actualizar color de equipo
   const actualizarColor = ( color, id ) => { 
     console.log( "Actualizar : ", color, id )
-    const equiposActualizados = equipos.map( (equipo) => {
-      if(equipo.id === id){
+    const equiposActualizados = equipos.map( ( equipo ) => {
+      if( equipo.id === id ){
         equipo.colorPrimario = color;
       }
-
       return equipo;
     })
 
-    actualizarEquipos(equiposActualizados);
+    actualizarEquipos( equiposActualizados );
   }
 
   //Crear Equipo
-  const crearEquipo = (nuevoEquipo) => {
-    console.log(nuevoEquipo)
-    actualizarEquipos( [...equipos, { ...nuevoEquipo, id: uuid() } ] )
+  const crearEquipo = ( nuevoEquipo ) => {
+    console.log( nuevoEquipo );
+    actualizarEquipos( [...equipos, { ...nuevoEquipo, id: uuid() } ] );
+  }
+
+  //Funcion Like
+  const like = ( id ) => {
+     const colabActualizados = colaboradores.map( ( colaborador ) => { 
+      if( colaborador.id === id ){
+        colaborador.fav = !colaborador.fav;
+      }
+      return colaborador;
+    })
+    
+    actualizarColab( colabActualizados );
   }
  
   return (    
@@ -157,6 +173,7 @@ function App() {
           colaboradores={ colaboradores.filter( colaborador => colaborador.equipo === equipo.titulo )}
           eliminarColab={ eliminarColab }
           actualizarColor={ actualizarColor }
+          like={ like }
           /> )        
       }
 
